@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InGame : MonoBehaviour
 {
+    public AudioSource bgm;
     void Start()
     {
         Object barrel = Resources.Load("Barrel");
@@ -15,6 +16,7 @@ public class InGame : MonoBehaviour
         Instantiate(barrel);
 
         RandomCube();
+        bgm=GetComponent<AudioSource>();
     }
 
     private void Update()

@@ -12,9 +12,13 @@ public class Mouse : MonoBehaviour
     GameObject hitObject;
     GameObject boom;
     bool boomClicked = false;
+    [SerializeField] AudioSource audiosource;
+    [SerializeField] AudioClip putsound;
+    [SerializeField] AudioClip scream;
 
     private void Start()
     {
+        audiosource = GetComponent<AudioSource>(); 
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         target = GameObject.Find("Barrel(Clone)");
     }
@@ -68,6 +72,8 @@ public class Mouse : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            audiosource.clip = putsound;
+            audiosource.Play();
             Vector3 stTarget = new Vector3(hitObject.transform.position.x, hitObject.transform.position.y, hitObject.transform.position.z);
             transform.position = stTarget;
             this.enabled = false;
@@ -95,6 +101,9 @@ public class Mouse : MonoBehaviour
         if (boomClicked)
         {
             Debug.Log("Boom Clicked");
+            audiosource.clip = scream;
+            audiosource.Play();
+
 
             float randomx = Random.Range(0, 10f);
             float randomz = Random.Range(0, 10f);
